@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<p>Are you sure You want to delete this order?</p><br>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+            <form method="POST" action="">{% csrf_token %}
+                <a class="btn btn-primary btn-sm" href="{% url 'index' %}">No</a>
+                <input class="btn btn-danger btn-sm" type="submit" value="Yes">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

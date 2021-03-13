@@ -20,7 +20,14 @@
                     </tr>
                 {% endfor %}
             </table>
+            <hr>
+            {%if not orders %}
+            <div style="text-align: center;">
+                <p style="background-color: teal;color: thistle;">You dont have any orders yet</p>
+            </div>
+            {%endif%}
         </div>
+        
     </div>
 </div>
 {% endblock %}

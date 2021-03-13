@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-5">
+        <div class="card card-body" style="text-align: center;">
+            <a class="btn btn-warning btn-block" href="{% url 'user' %}">Back To Profile</a>
+            <hr>
+            <h2>Account Settings</h2>
+            <hr>
+            <img src="{{customer.ImageUrl}}" style="height: 300px;">
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="card card-body">
+            <form method="POST" action="" enctype="multipart/form-data">
+                {%csrf_token%}
+                {{form.as_p}}
+                <input class="btn btn-primary" type="submit" value="Update Profile">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

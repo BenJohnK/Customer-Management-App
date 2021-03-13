@@ -9,10 +9,17 @@ class Customer(models.Model):
     phone=models.CharField(max_length=200,null=True)
     email=models.CharField(max_length=200,null=True)
     date_created=models.DateTimeField(auto_now_add=True,null=True)
-
+    profile_pic=models.ImageField(default="profile_pic.jpg",null=True,blank=True)
     def __str__(self):
         return self.name
     
+    @property
+    def ImageUrl(self):
+        try:
+            url=self.profile_pic.url
+        except:
+            url=''
+        return url
     @property
     def orders(self):
         order_count=self.order_set.all().count()

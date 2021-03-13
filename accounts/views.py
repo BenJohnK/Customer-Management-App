@@ -152,6 +152,7 @@ def deleteCustomer(request,id):
     return render(request,"accounts/deletecustomer.html",{'customer':customer,'user':user})
 
 @login_required(login_url='/login/')
+@allowed_users(allowed_roles=['customers'])
 def userPage(request):
     total_orders=Order.objects.all().count()
     delivered=Order.objects.filter(status="Delivered").count()
@@ -161,5 +162,15 @@ def userPage(request):
     orders=customer.order_set.all()
     return render(request,"accounts/userPage.html",{'total_orders':total_orders,'delivered':delivered,'pending':pending,'user':user,'orders':orders})
 
+@login_required(login_url='/login/')
+@allowed_users(allowed_roles=['customers'])
+def profilePage(request):
+    customer=request.user.customer
+    form=CustomerForm(instance=customer)
+    if request.method=="POST":
+        form=CustomerForm(request.POST,request.FILES,instance=customer)
+        if form.is_valid():
+            form.save()
+    return render(request,"accounts/profilepage.html",{'form':form,'customer':customer})
 
 

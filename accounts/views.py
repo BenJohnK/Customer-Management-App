@@ -41,6 +41,8 @@ def register(request):
             group=Group.objects.get(name="customers")
             user.groups.add(group)
             username=form.cleaned_data.get('username')
+            email=form.cleaned_data.get('email')
+            Customer.objects.create(user=user,name=username,email=email)
             messages.success(request,'Account was created for '+username)
             return redirect('/login/')
     return render(request,"accounts/register.html",{'form':form})
@@ -155,7 +157,9 @@ def userPage(request):
     delivered=Order.objects.filter(status="Delivered").count()
     pending=Order.objects.filter(status="Pending").count()
     user=True
-    return render(request,"accounts/userPage.html",{'total_orders':total_orders,'delivered':delivered,'pending':pending,'user':user})
+    customer=request.user.customer
+    orders=customer.order_set.all()
+    return render(request,"accounts/userPage.html",{'total_orders':total_orders,'delivered':delivered,'pending':pending,'user':user,'orders':orders})
 
 
 

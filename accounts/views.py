@@ -42,7 +42,7 @@ def register(request):
             user.groups.add(group)
             username=form.cleaned_data.get('username')
             email=form.cleaned_data.get('email')
-            Customer.objects.create(user=user,name=username,email=email)
+            # Customer.objects.create(user=user,name=username,email=email)
             messages.success(request,'Account was created for '+username)
             return redirect('/login/')
     return render(request,"accounts/register.html",{'form':form})

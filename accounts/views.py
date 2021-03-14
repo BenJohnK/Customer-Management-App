@@ -38,8 +38,8 @@ def register(request):
         form=CreateUserForm(request.POST)
         if form.is_valid():
             user=form.save()
-            group=Group.objects.get(name="customers")
-            user.groups.add(group)
+            # group=Group.objects.get(name="customers")
+            # user.groups.add(group)
             username=form.cleaned_data.get('username')
             email=form.cleaned_data.get('email')
             # Customer.objects.create(user=user,name=username,email=email)

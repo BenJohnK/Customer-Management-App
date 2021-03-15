@@ -1,0 +1,2 @@
+before you run this application,
+make sure you have you have installed pillow and django-filter. If not, install them using pip install pillow and pip install django-filter.
